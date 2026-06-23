@@ -148,129 +148,118 @@
     .logo span { display: block; font-size: 0.68rem; font-weight: 600; color: var(--text); opacity: 0.6; letter-spacing: 0.05em; }
     .footer-logo span { font-size: 0.7rem; font-weight: 400; opacity: 0.55; margin-top: 2px; color: var(--white); }
 
-    .nav-links { display: flex; gap: 1.75rem; align-items: center; list-style: none; }
-    .nav-links a {
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--text);
-      transition: color var(--transition);
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      left: 0; right: 0; bottom: -3px;
-      height: 2px;
-      background: var(--blue);
-      border-radius: 2px;
-      transform: scaleX(0);
-      transition: transform var(--transition);
-    }
-    .nav-links a:hover { color: var(--blue); }
-    .nav-links a:hover::after { transform: scaleX(1); }
+    /* ===== HAMBURGER ===== */
+    .header-right { display: none; }
 
-    .header-right { display: flex; align-items: center; gap: 1.25rem; }
-    .header-phone {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 800;
-      font-size: 1.05rem;
-      color: var(--blue);
-      white-space: nowrap;
-    }
-    .header-phone a { color: inherit; }
-
-    /* Hamburger */
     .hamburger {
-      display: none;
+      display: flex;
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
       background: none;
       border: none;
-      padding: 4px;
-      z-index: 10000;
+      padding: 10px;
+      border-radius: 8px;
+      transition: background var(--transition);
+      z-index: 30;
     }
+    .hamburger:hover { background: rgba(174,214,241,0.3); }
     .hamburger span {
       display: block;
-      width: 24px;
+      width: 22px;
       height: 2px;
       background: var(--text);
       border-radius: 2px;
-      transition: transform var(--transition), opacity var(--transition);
     }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* Mobile drawer backdrop */
+    /* ===== DRAWER BACKDROP ===== */
     .nav-backdrop {
-      display: none;
       position: fixed;
       inset: 0;
-      background: rgba(10,22,40,0.55);
-      z-index: 9998;
+      background: rgba(10,22,40,0.6);
+      z-index: 40;
       opacity: 0;
+      pointer-events: none;
       transition: opacity 0.25s ease;
     }
-    .nav-backdrop.open { display: block; opacity: 1; }
+    .nav-backdrop.open { opacity: 1; pointer-events: all; }
 
-    @media (max-width: 767px) {
-      #site-header {
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        background: rgba(255,255,255,0.97);
-      }
-      .hamburger { display: flex; }
-      .header-right { display: none; }
-
-      .nav-links {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 0; right: 0; bottom: 0;
-        width: 280px;
-        background: #fff;
-        box-shadow: -4px 0 32px rgba(10,22,40,0.18);
-        padding: 5rem 2rem 2rem;
-        gap: 0;
-        font-size: 1rem;
-        z-index: 9999;
-        transform: translateX(100%);
-        transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-        align-items: stretch;
-        justify-content: flex-start;
-        overflow-y: auto;
-      }
-      .nav-links.open { transform: translateX(0); }
-
-      .nav-links li { border-bottom: 1px solid rgba(174,214,241,0.35); }
-      .nav-links li:first-child { border-top: 1px solid rgba(174,214,241,0.35); }
-
-      .nav-links a {
-        display: block;
-        padding: 1rem 0.25rem;
-        font-size: 1rem;
-        font-weight: 600;
-        color: var(--text);
-      }
-      .nav-links a:hover { color: var(--blue); }
-
-      /* Phone + CTA inside drawer */
-      .drawer-footer {
-        margin-top: 1.5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-      }
-      .drawer-phone {
-        font-family: 'Nunito', sans-serif;
-        font-weight: 800;
-        font-size: 1.1rem;
-        color: var(--blue);
-        text-align: center;
-      }
-      .drawer-cta { text-align: center; }
+    /* ===== SLIDE-IN DRAWER ===== */
+    .nav-drawer {
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 300px;
+      background: #fff;
+      z-index: 50;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -8px 0 40px rgba(10,22,40,0.15);
+      overflow-y: auto;
     }
+    .nav-drawer.open { transform: translateX(0); }
+
+    /* X button — sits exactly where the hamburger is */
+    .drawer-close-btn {
+      position: absolute;
+      top: 0; right: 0;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: var(--text);
+      transition: background var(--transition);
+      flex-shrink: 0;
+    }
+    .drawer-close-btn:hover { background: rgba(174,214,241,0.3); }
+
+    /* Nav links */
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+      padding-top: 80px;
+      flex: 1;
+    }
+    .nav-links li { border-bottom: 1px solid rgba(174,214,241,0.4); }
+    .nav-links li:first-child { border-top: 1px solid rgba(174,214,241,0.4); }
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text);
+      transition: color var(--transition), background var(--transition), padding-left var(--transition);
+    }
+    .nav-links a:hover { color: var(--blue); background: var(--blue-xlight); padding-left: 2rem; }
+
+    /* Drawer footer */
+    .drawer-footer {
+      padding: 1.5rem;
+      border-top: 2px solid rgba(174,214,241,0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+    .drawer-phone {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--blue);
+      text-align: center;
+      display: block;
+      padding: 0.5rem;
+    }
+    .drawer-cta { display: flex; }
+    .drawer-cta .btn { flex: 1; text-align: center; }
 
     /* ===== HERO ===== */
     #hero {
@@ -682,7 +671,7 @@
 
     /* ===== FOOTER ===== */
     footer {
-      background: linear-gradient(135deg, var(--footer-bg) 0%, #0e2040 100%);
+      background: #11294a;
       color: rgba(255,255,255,0.75);
       padding: 3rem 0;
     }
@@ -907,35 +896,35 @@
       <a href="#" class="logo" aria-label="Jackson's Plumbing & Heating — home">
         <img src="whitelogo.png" alt="Jackson's Plumbing & Heating" class="logo-img" />
       </a>
-
-      <nav role="navigation" aria-label="Main navigation">
-        <ul class="nav-links" id="nav-links">
-          <li><a href="#services" class="nav-close">Services</a></li>
-          <li><a href="#how-it-works" class="nav-close">How It Works</a></li>
-          <li><a href="#testimonials" class="nav-close">Reviews</a></li>
-          <li><a href="#gallery" class="nav-close">Gallery</a></li>
-          <li><a href="#coverage" class="nav-close">Coverage</a></li>
-          <li><a href="#contact" class="nav-close">Contact</a></li>
-          <li class="drawer-footer">
-            <a href="tel:07534958280" class="drawer-phone">07534 958280</a>
-            <div class="drawer-cta">
-              <a href="#contact" class="btn btn-primary nav-close">Get a Quote</a>
-            </div>
-          </li>
-        </ul>
-      </nav>
-
-      <div class="header-right">
-        <p class="header-phone"><a href="tel:07534958280">07534 958280</a></p>
-        <a href="#contact" class="btn btn-primary">Get a Quote</a>
-      </div>
-
-      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
+
+  <!-- Backdrop and drawer live OUTSIDE header to avoid stacking context trap -->
   <div class="nav-backdrop" id="nav-backdrop"></div>
+  <div class="nav-drawer" id="nav-drawer" aria-label="Navigation menu">
+    <button class="drawer-close-btn" id="drawer-close" aria-label="Close menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#services" class="nav-close">Services</a></li>
+      <li><a href="#how-it-works" class="nav-close">How It Works</a></li>
+      <li><a href="#testimonials" class="nav-close">Reviews</a></li>
+      <li><a href="#gallery" class="nav-close">Gallery</a></li>
+      <li><a href="#coverage" class="nav-close">Coverage</a></li>
+      <li><a href="#contact" class="nav-close">Contact</a></li>
+    </ul>
+    <div class="drawer-footer">
+      <a href="tel:07534958280" class="drawer-phone">07534 958280</a>
+      <div class="drawer-cta">
+        <a href="#contact" class="btn btn-primary nav-close">Get a Quote</a>
+      </div>
+    </div>
+  </div>
 
   <main>
 
@@ -1309,7 +1298,7 @@
   <footer role="contentinfo">
     <div class="footer-inner">
       <div class="footer-logo">
-        <img src="whitelogo.png" alt="Jackson's Plumbing & Heating" class="logo-img footer-logo-img" />
+        <img src="bluelogo.png" alt="Jackson's Plumbing & Heating" class="logo-img footer-logo-img" />
       </div>
       <div class="footer-links">
         <!-- REPLACE: update contact details if they change -->
@@ -1331,38 +1320,43 @@
       }, { passive: true });
     })();
 
-    // Mobile hamburger
+    // Burger menu
     (function () {
-      var btn = document.getElementById('hamburger');
-      var nav = document.getElementById('nav-links');
-      var backdrop = document.getElementById('nav-backdrop');
+      var hamburger = document.getElementById('hamburger');
+      var drawer    = document.getElementById('nav-drawer');
+      var backdrop  = document.getElementById('nav-backdrop');
+      var closeBtn  = document.getElementById('drawer-close');
 
-      function close() {
-        btn.classList.remove('open');
-        nav.classList.remove('open');
+      function openMenu() {
+        drawer.classList.add('open');
+        backdrop.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        drawer.classList.remove('open');
         backdrop.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
+        hamburger.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
       }
 
-      btn.addEventListener('click', function () {
-        var isOpen = nav.classList.contains('open');
-        if (isOpen) { close(); return; }
-        btn.classList.add('open');
-        nav.classList.add('open');
-        backdrop.classList.add('open');
-        btn.setAttribute('aria-expanded', 'true');
-        document.body.style.overflow = 'hidden';
+      hamburger.addEventListener('click', function () {
+        drawer.classList.contains('open') ? closeMenu() : openMenu();
       });
 
-      backdrop.addEventListener('click', close);
+      closeBtn.addEventListener('click', closeMenu);
+      backdrop.addEventListener('click', closeMenu);
 
       document.querySelectorAll('.nav-close').forEach(function (link) {
-        link.addEventListener('click', close);
+        link.addEventListener('click', closeMenu);
       });
 
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && nav.classList.contains('open')) { close(); btn.focus(); }
+        if (e.key === 'Escape' && drawer.classList.contains('open')) {
+          closeMenu();
+          hamburger.focus();
+        }
       });
     })();
 
