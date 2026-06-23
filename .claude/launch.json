@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "leejackson-site",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "7790", "."],
+      "port": 7790
+    }
+  ]
+}
