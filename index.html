@@ -215,6 +215,11 @@
     .nav-backdrop.open { display: block; opacity: 1; }
 
     @media (max-width: 767px) {
+      #site-header {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: rgba(255,255,255,0.97);
+      }
       .hamburger { display: flex; }
       .header-right { display: none; }
 
@@ -903,7 +908,22 @@
         <img src="whitelogo.png" alt="Jackson's Plumbing & Heating" class="logo-img" />
       </a>
 
-      <nav role="navigation" aria-label="Main navigation"></nav>
+      <nav role="navigation" aria-label="Main navigation">
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#services" class="nav-close">Services</a></li>
+          <li><a href="#how-it-works" class="nav-close">How It Works</a></li>
+          <li><a href="#testimonials" class="nav-close">Reviews</a></li>
+          <li><a href="#gallery" class="nav-close">Gallery</a></li>
+          <li><a href="#coverage" class="nav-close">Coverage</a></li>
+          <li><a href="#contact" class="nav-close">Contact</a></li>
+          <li class="drawer-footer">
+            <a href="tel:07534958280" class="drawer-phone">07534 958280</a>
+            <div class="drawer-cta">
+              <a href="#contact" class="btn btn-primary nav-close">Get a Quote</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
 
       <div class="header-right">
         <p class="header-phone"><a href="tel:07534958280">07534 958280</a></p>
@@ -916,20 +936,6 @@
     </div>
   </header>
   <div class="nav-backdrop" id="nav-backdrop"></div>
-  <ul class="nav-links" id="nav-links" role="list">
-    <li><a href="#services" class="nav-close">Services</a></li>
-    <li><a href="#how-it-works" class="nav-close">How It Works</a></li>
-    <li><a href="#testimonials" class="nav-close">Reviews</a></li>
-    <li><a href="#gallery" class="nav-close">Gallery</a></li>
-    <li><a href="#coverage" class="nav-close">Coverage</a></li>
-    <li><a href="#contact" class="nav-close">Contact</a></li>
-    <li class="drawer-footer">
-      <a href="tel:07534958280" class="drawer-phone">07534 958280</a>
-      <div class="drawer-cta">
-        <a href="#contact" class="btn btn-primary nav-close">Get a Quote</a>
-      </div>
-    </li>
-  </ul>
 
   <main>
 
